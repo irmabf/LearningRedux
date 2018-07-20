@@ -21,7 +21,17 @@ const setCount = ({ count = 0}) => ({
   count
 });
 
-const store = createStore( (state = { count: 0}, action) => {
+/**
+ * 
+ * Reducers 
+ * A reducer determins what to do based of on
+ * an action, how do we wanna change the state
+ * 
+ * Reducers are pure functions:
+ * 
+ * -> The output is ONLY determined by the input
+***/
+const countReducer = (state = { count: 0}, action) => {
   switch (action.type) {
     case 'INCREMENT':
     return {
@@ -42,7 +52,14 @@ const store = createStore( (state = { count: 0}, action) => {
     default:
       return state;
   }
-});
+};
+
+// Store
+
+//I pass to createStore()  my reducer,
+//in this case, countReducer
+
+const store = createStore(countReducer);
 
 const unsubscribe = store.subscribe( () => {
   console.log(store.getState());
